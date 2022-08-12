@@ -22,6 +22,6 @@ mongoose.connect(
 );
 
 //log mongo queries being executed for debugging
-mongoose.mongo.set("debug", true);
+mongoose.set("debug", true);
 
 app.listen(PORT, () => console.log(`🌍 Connected on localhost:${PORT}`));

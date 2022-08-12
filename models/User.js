@@ -1,5 +1,5 @@
 const { Schema, model, Types } = require("mongoose");
-const dateFormat = require('../utils/dateFormat');
+const dateFormat = require("../utils/dateFormat");
 
 const UserSchema = new Schema(
 	{
@@ -23,23 +23,22 @@ const UserSchema = new Schema(
 		],
 		friends: [
 			{
-				_id: { type: Types.ObjectId, ref: "User" },
-				username: { type: String, ref: "User" },
+				type: Types.ObjectId,
+				ref: "User",
 			},
 		],
 	},
 	{
-                toJSON: {
-                        virtuals: true,
-                },
-                id: false
-        }
+		toJSON: {
+			virtuals: true,
+		},
+		id: false,
+	}
 );
 
-UserSchema.virtual("friendCount").get(function() {
-        return this.friends.length;
+UserSchema.virtual("friendCount").get(function () {
+	return this.friends.length;
 });
-
 
 const User = model("User", UserSchema);
 
