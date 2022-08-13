@@ -5,14 +5,20 @@ const { getAllThoughts, addThought, getThoughtById, editThought, deleteThought, 
 router
         .route('/')
         .get(getAllThoughts) // get all thoughts
+
+router.
+        route('/:userId')
         .post(addThought); //post one thought
+
+router
+        .route('/:userId/:thoughtId')
+        .delete(deleteThought) //delete thought
 
 // /api/thoughts/:thoughtId
 router
         .route('/:thoughtId')
         .get(getThoughtById) //get single thought
         .put(editThought) //update thought
-        .delete(deleteThought) //delete thought
         .post(addReaction) //post reaction
 
 router

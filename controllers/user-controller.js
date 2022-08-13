@@ -1,13 +1,13 @@
-const { User } = require("../models");
+const { User, Thought } = require("../models");
 
 const userController = {
 	getAllUsers(req, res) {
 		User.find({})
 			.populate({
 				path: "friends",
-                                options: {select: "-__v -email -thoughts -friends"},
+				options: { select: "-__v -email -thoughts -friends" },
 			})
-                        .lean()
+			.lean()
 			.populate({
 				path: "thoughts",
 				select: "-__v",
@@ -25,11 +25,11 @@ const userController = {
 				path: "thoughts",
 				select: "-__v",
 			})
-                        .populate({
+			.populate({
 				path: "friends",
-                                options: {select: "-__v -email -thoughts -friends"},
+				options: { select: "-__v -email -thoughts -friends" },
 			})
-                        .lean()
+			.lean()
 			.select("-__v")
 			.then((dbUserData) => {
 				if (!dbUserData) {

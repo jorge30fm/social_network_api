@@ -1,5 +1,6 @@
 const { Schema, model, Types } = require("mongoose");
 const dateFormat = require("../utils/dateFormat");
+const Thought = require('./Thought')
 
 const UserSchema = new Schema(
 	{
@@ -39,6 +40,10 @@ const UserSchema = new Schema(
 UserSchema.virtual("friendCount").get(function () {
 	return this.friends.length;
 });
+UserSchema.pre('remove', function(next){
+	const Thoughts = mongoose.model("Thought")
+	Thought.remove({_id: {$in: this.thoughts}})
+})
 
 const User = model("User", UserSchema);
 
