@@ -4,6 +4,11 @@ const userController = {
 	getAllUsers(req, res) {
 		User.find({})
 			.populate({
+				path: "friends",
+                                options: {select: "-__v -email -thoughts -friends"},
+			})
+                        .lean()
+			.populate({
 				path: "thoughts",
 				select: "-__v",
 			})
@@ -20,6 +25,11 @@ const userController = {
 				path: "thoughts",
 				select: "-__v",
 			})
+                        .populate({
+				path: "friends",
+                                options: {select: "-__v -email -thoughts -friends"},
+			})
+                        .lean()
 			.select("-__v")
 			.then((dbUserData) => {
 				if (!dbUserData) {
