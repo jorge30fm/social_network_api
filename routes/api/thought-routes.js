@@ -19,6 +19,9 @@ router
         .route('/:thoughtId')
         .get(getThoughtById) //get single thought
         .put(editThought) //update thought
+
+router
+        .route('/:thoughtId/reactions')
         .post(addReaction) //post reaction
 
 router
